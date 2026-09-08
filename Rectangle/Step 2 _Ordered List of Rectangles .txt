@@ -1,0 +1,256 @@
+Step 2: Ordered List of Rectangles Based on Area
+
+The main idea is to modify the ordered list of integers from Step 1 
+so that the list stores rectangles instead of integer keys.
+
+The rectangles will always be maintained in ascending order of area.
+
+Problem Statement: Ordered List of Rectangles Based on Area
+
+Create an ordered list of rectangles based on their area.
+
+In Step 1, an ordered list of integers was implemented. 
+Modify that program so that the list stores rectangles instead of integer keys.
+
+Each rectangle is represented by its length and breadth.
+
+Requirements:
+
+1. Rectangle ADT
+
+Create a structure `rect` containing:
+
+* `length`
+* `breadth`
+
+Implement the following functions:
+
+* A function to create/set the length and breadth of a rectangle.
+* A function to display a rectangle.
+* A function to calculate the area of a rectangle.
+* A function to compare two rectangles based on their area.
+
+The comparison function should return true if the first rectangle has a smaller area than the second rectangle.
+
+2. Ordered List
+
+Modify the existing ordered list program.
+
+In the node structure, replace the integer `key` with a rectangle.
+
+Instead of:
+
+
+int key;
+
+
+the node should contain:
+
+rect data;
+
+
+The list must be maintained in ascending order of rectangle area.
+
+3. Insertion
+
+The client program should read the length and breadth of a rectangle.
+
+The insertion operation should:
+
+1. Receive the length and breadth from the client.
+2. Create a rectangle.
+3. Set its length and breadth.
+4. Insert the rectangle into the ordered list.
+5. Use the rectangle comparison function to determine its correct position.
+
+The list should be ordered according to:
+
+
+Area = length × breadth
+
+
+4. Duplicate Rectangles
+
+The dimensions of rectangles need not be unique.
+
+For example:
+
+
+Rectangle 1: 4 × 5 → Area = 20
+Rectangle 2: 2 × 10 → Area = 20
+
+Both rectangles should be allowed in the list.
+
+Therefore, the ordered list must support duplicate areas.
+
+5. Display
+
+Modify the list display function so that it calls the rectangle display function.
+
+The list should display every rectangle along with its dimensions and area.
+
+6. Files
+
+The complete program must contain exactly five files:
+
+1. `rect.h` – Rectangle interface
+2. `rect.c` – Rectangle implementation
+3. `list.h` – Ordered list interface
+4. `list.c` – Ordered list implementation
+5. `client.c` – Client program
+
+ Example
+
+For the following input:
+
+5 4
+2 3
+6 2
+4 5
+3 3
+
+
+The areas are:
+
+
+5 × 4 = 20
+2 × 3 = 6
+6 × 2 = 12
+4 × 5 = 20
+3 × 3 = 9
+
+
+The ordered list should be:
+
+
+Rectangle: 2 × 3   Area = 6
+Rectangle: 3 × 3   Area = 9
+Rectangle: 6 × 2   Area = 12
+Rectangle: 5 × 4   Area = 20
+Rectangle: 4 × 5   Area = 20
+
+
+Thus, the list is ordered according to area, while rectangles having the same area are also allowed.
+
+
+The objective of this problem is to demonstrate:
+
+* Abstract Data Types (ADT)
+* Encapsulation
+* Modular programming
+* Structures in C
+* Linked lists
+* Ordered insertion
+* Function-based comparison
+* Separation of interface and implementation
+* Reusability of data structures
+
+
+              client.c
+                 |
+                 v
+              list.h
+                 |
+                 v
+              list.c
+                 |
+                 v
+              rect.h
+                 |
+                 v
+              rect.c
+The important point is that list.c does not calculate the area itself.
+
+It asks the rectangle ADT:
+
+"Is rectangle 1 smaller than rectangle 2?"
+
+The rectangle ADT handles the area comparison.
+
+
+rect.h
+  |
+  |  rectangle structure + function declarations
+  |
+  v
+rect.c
+  |
+  |  setRect()
+  |  area()
+  |  displayRect()
+  |  isSmaller()
+  |
+  v
+list.h
+  |
+  |  node_t
+  |  list_t
+  |
+  v
+list.c
+  |
+  |  insert()
+  |  displayList()
+  |  destroyList()
+  |
+  v
+client.c
+  |
+  |  reads length & breadth
+  |  calls insert()
+  |  calls displayList()
+
+Example Execution
+
+Input:
+
+Enter number of rectangles: 5
+
+
+Enter length and breadth of rectangle 1: 5 4
+
+
+Enter length and breadth of rectangle 2: 2 3
+
+
+Enter length and breadth of rectangle 3: 6 2
+
+
+Enter length and breadth of rectangle 4: 4 5
+
+
+Enter length and breadth of rectangle 5: 3 3
+
+Calculation:
+
+5 × 4 = 20
+2 × 3 = 6
+6 × 2 = 12
+4 × 5 = 20
+3 × 3 = 9
+
+Output:
+
+Ordered List of Rectangles:
+
+
+Length = 2, Breadth = 3, Area = 6
+Length = 3, Breadth = 3, Area = 9
+Length = 6, Breadth = 2, Area = 12
+Length = 5, Breadth = 4, Area = 20
+Length = 4, Breadth = 5, Area = 20
+Why are the two area-20 rectangles both present?
+
+Because the problem says dimensions need not be unique.
+
+5 × 4 = 20
+4 × 5 = 20
+
+Both are inserted.
+
+The condition:
+
+!isSmaller(newNode->data, current->next->data)
+
+means that if the new rectangle has an equal area, it is not considered smaller,
+ so it is inserted after the existing rectangle. Thus, duplicates are preserved.

@@ -1,0 +1,135 @@
+Ordered List of Sites Based on Area:-
+
+
+1. Problem Statement
+
+Consider a layout containing several sites. To simplify the problem, each site is represented by a rectangle.
+
+Each rectangle has:
+
+length
+breadth
+area
+
+The sites have to be arranged in an ordered list based on their area.
+
+For example, if the sites have areas:
+
+Site 1 → 20
+Site 2 → 12
+Site 3 → 30
+Site 4 → 15
+
+The ordered list should be:
+
+12 → 15 → 20 → 30
+
+We will develop this problem in stages.
+
+STEP 1: Create a Rectangle ADT
+
+Each site is represented by a rectangle.
+
+We need to:
+
+Create a structure called rect.
+
+Store:
+length
+breadth
+
+Develop a function to set the dimensions.
+Develop a function to display the rectangle.
+Develop a function to calculate the area.
+Test the rectangle using a client program.
+
+We will create three files:
+
+rect.h
+rect.c
+client_rect.c
+
+
+
+Key Data Structures Concepts
+
+This problem demonstrates several important concepts:
+
+Concept       	      Application
+Structure	      Represents a rectangle
+ADT	              rect and its operations
+Header file	      Interface
+.c file	              Implementation
+Client	              Uses the ADT
+Dynamic memory	      Creates list nodes
+Linked list	      Stores sites
+Ordered list	      Maintains increasing area
+Function pointers     Not required here
+Encapsulation	      Client need not know implementation details
+
+
+Encapsulation means bundling data and the functions that operate on that data together, while hiding the internal implementation details from the user.
+
+Encapsulation = Data + Operations + Hiding implementation details
+
+Example from your Rectangle ADT:-
+
+You have:
+
+typedef struct
+{
+    int length;
+    int breadth;
+} rect;
+
+and functions:
+
+void setRect(rect *r, int length, int breadth);
+void displayRect(rect r);
+int area(rect r);
+
+The client program only needs to know what functions are available and how to use them.
+
+For example:
+
+rect r;
+
+
+setRect(&r, 10, 5);
+
+
+printf("Area = %d", area(r));
+
+The client does not need to worry about how area() is implemented.
+
+The implementation is hidden inside rect.c:
+
+int area(rect r)
+{
+    return r.length * r.breadth;
+}
+In your three-file design
+rect.h
+   ↓
+Interface
+"What operations are available?"
+
+
+rect.c
+   ↓
+Implementation
+"How are the operations performed?"
+
+
+client_rect.c
+   ↓
+User of the ADT
+"How do I use those operations?"
+
+So:
+
+rect.h → tells WHAT can be done
+
+rect.c → tells HOW it is done
+
+client_rect.c → uses the ADT without worrying about HOW it works
